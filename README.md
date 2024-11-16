@@ -5,7 +5,7 @@
 
 Este projeto foi desenvolvido durante o meu estágio com o objetivo de automatizar um processo que exigia intervenção manual. Ele extrai informações de mais de 20 extratos provenientes de diferentes seguradoras, incluindo formatos como PDF, TXT, CSV e Excel, realiza a limpeza e transformação desses dados de acordo com a regra de cada seguradora, deixando-os prontos para serem carregados no datalake e, posteriormente, inseridos no banco de dados da empresa.
 
-OBs: Esta é a estrutura do projeto após a refatoração. Não seguirei incluindo edições nesse código, por questões de segurança, não farei implementação com o objetivo de mantê-lo acessível e sem informações sensíveis.
+OBs: Esta é a estrutura do projeto após a refatoração. Não seguirei incluindo edições ou novas implementações nessa versão pública, com o objetivo de mantê-lo acessível e sem informações sensíveis.
 
 ## Estrutura do Projeto
 
