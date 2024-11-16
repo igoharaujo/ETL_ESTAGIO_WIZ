@@ -55,7 +55,7 @@ class DataExtractor:
             return None
 
 # Lista de seguradoras a serem processadas
-seguradoras = ['alfa', 'mitsui']  
+seguradoras = ['alfa', 'mitsui']  # inserir mais seguradoras a medida que novas forem surgindo.
 
 if __name__ == "__main__":
     dfs_resultados = []
