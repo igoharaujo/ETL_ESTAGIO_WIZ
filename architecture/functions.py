@@ -4,6 +4,7 @@ from pathlib import Path
 import fitz
 from typing import Optional
 import datetime
+import math
 
 def leitura_data_arquivo(nom_arquivo):
     """Extrai o campo DataExtrato do nome do arquivo"""
@@ -56,6 +57,8 @@ def extrair_informacao_excel(df: pd.DataFrame, texto_alvo: str, padrao: str) -> 
 
 def extrair_informacao_pdf(doc: fitz.Document, texto_alvo: str, padrao: str) -> Optional[str]:
     """Extrai informação de um documento PDF."""
+    nome_arquivo = doc
+    doc = fitz.open(nome_arquivo)
     texto_completo = "".join(pagina.get_text() for pagina in doc)
     if texto_alvo in texto_completo:
         indice_texto = texto_completo.find(texto_alvo)
@@ -79,5 +82,49 @@ def extrai_recibo(texto_alvo: str, padrao: str, nome_arquivo: str) -> Optional[s
         else:
             raise ValueError(f"Formato de arquivo não suportado: {arquivo.suffix}")
     except Exception as e:
-        print(f"Erro ao processar o arquivo {nome_arquivo}: {str(e)}")
         return extrair_data_do_nome_arquivo(nome_arquivo)
+
+
+
+def number_format(num):
+    """
+    Formata números para o formato correto: '1000,00'.
+
+    Parâmetros:
+        - num: (str, float, int) número a ser transformado.
+
+    Retorna:
+        - (str) número formatado com duas casas decimais e vírgula como separador decimal.
+    """
+
+    # Verificar se o valor é NaN, vazio ou None
+    if num is None or num == '' or (isinstance(num, float) and math.isnan(num)):
+        return "0,00"
+    
+    # Converter para string se não for uma string
+    num = str(num).strip()
+    
+    # Definir caracteres a serem removidos
+    alphas_set = set('%$R°º()')
+
+    # Remover caracteres não numéricos (exceto ponto e vírgula, tratados abaixo)
+    num = ''.join([c for c in num if c not in alphas_set])
+
+    # Tratar múltiplos separadores (pontos ou vírgulas) mantendo apenas o último como decimal
+    num_parts = re.split(r'[,.]', num)
+    
+    # Se tiver mais de um separador decimal, mantemos apenas o último como decimal
+    if len(num_parts) > 1:
+        num = ''.join(num_parts[:-1]) + '.' + num_parts[-1]
+    else:
+        num = num_parts[0]
+    
+    # Converter para float e arredondar com duas casas decimais
+    try:
+        num = float(num)
+        # Formatar para string no formato desejado e substituir ponto por vírgula
+        formatted_num = f"{num:.2f}".replace(".", ",")  # Remove separadores de milhar
+        return formatted_num
+    except ValueError:
+        raise ValueError(f"Não foi possível converter o número '{num}' para um valor numérico.")
+

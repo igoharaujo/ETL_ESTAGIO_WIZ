@@ -8,6 +8,6 @@ class EstrategiaExtracao(ABC):
         pass
 
     @abstractmethod
-    def processar_dataframe(self, texto_extraido):
+    def processar_dataframe(self, nome_arquivo, texto_alvo):
         """Método abstrato para processar o texto extraído em um DataFrame."""
         pass

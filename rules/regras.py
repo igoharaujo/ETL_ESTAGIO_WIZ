@@ -1,6 +1,7 @@
 cardif = {
     "NmSeguradora": "CARDIF",
     "CNPJSeguradora": "0000000000000-00",
+    "NumeroParcela": False,
     "CanalVenda": "Conseg",
     "CdRamoSusep": False,  
     "data": False,
@@ -14,6 +15,7 @@ cardif = {
 mitsui = {
     "NmSeguradora": "MITSUI",
     "CNPJSeguradora": "0000000000000-00",
+    "NumeroParcela":'False',
     "CanalVenda": "Conseg",
     "CdRamoSusep": False,  
     "data": False,
@@ -27,6 +29,7 @@ mitsui = {
 alfa = {
     "NmSeguradora": False,  # Nome da seguradora
     "CNPJSeguradora": False,  # CNPJ pode ser preenchido se necessário
+    "NumeroParcela": 'False',
     "CanalVenda": "Conseg",  # Defina o canal de venda específico
     "CdRamoSusep": False,  # Caso não tenha o código do ramo
     "data": False,  # Precisa de data, então mantemos True
@@ -37,10 +40,25 @@ alfa = {
     "arquivo_extraction": 'alfa.py'  # Arquivo correspondente ao processo de extração da Alfa
 }
 
+azul = {
+    "NmSeguradora": "AZUL",
+    "CNPJSeguradora": False,
+    "NumeroParcela":False,
+    "CanalVenda": "Conseg",
+    "CdRamoSusep": False,  
+    "data": False,
+    "NumeroRecibo": False,
+    "NumeroEndosso": False,
+    "extensao": '.pdf',
+    "nom_arquivo": 'AZUL',
+    "arquivo_extraction": 'azul.py' 
+}
+
 
 rules_dict = {
     'cardif': cardif,
     'mitsui': mitsui,
-    'alfa': alfa  
+    'alfa': alfa,
+    'azul': azul  
 }
 

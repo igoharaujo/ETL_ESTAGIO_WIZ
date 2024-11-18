@@ -18,21 +18,18 @@ O projeto está organizado da seguinte forma:
 
 ## Configuração do Ambiente
 
-1. Clone o repositório:
-   ```bash
-   git clone <URL do repositório>
-   cd <nome do repositório>
-   ```
+### Passo 1: Clonar o Repositório
 
-2. Instale as dependências usando Poetry:
-   ```bash
-   poetry install
-   ```
+Clone o repositório do projeto para o seu ambiente local e navegue até o diretório do projeto.
 
-3. Execute o projeto:
-   ```bash
-   poetry run python main.py
-   ```
+### Passo 2: Criar e Ativar o Ambiente Virtual
+
+Crie um ambiente virtual para isolar as dependências do projeto e ative-o. No macOS/Linux, use o comando `source` para ativar o ambiente. No Windows, use o comando `.\venv\Scripts\activate`.
+
+### Passo 3: Instalar Dependências
+
+Instale todas as dependências necessárias listadas no arquivo `requirements.txt` usando o comando `pip install -r requirements.txt`.
+
 
 ## Uso
 

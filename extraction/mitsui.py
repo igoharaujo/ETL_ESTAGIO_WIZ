@@ -7,7 +7,7 @@ import os
 
 
 class ExtracaoMitsui(EstrategiaExtracao):
-    def extrair_texto(self, nome_arquivo, texto_alvo):
+    def extrair_texto(self, nome_arquivo):
         """Método abstrato implementado sem funcionalidade (placeholder)."""
         pass
 
@@ -25,7 +25,7 @@ class ExtracaoMitsui(EstrategiaExtracao):
         num_extrato = mitsui.applymap(extrair_valor).stack().dropna().iloc[0]
         return num_extrato
 
-    def processar_dataframe(self, texto_extraido, nome_arquivo):
+    def processar_dataframe(self, nome_arquivo, texto_alvo=None):
         """Processa o arquivo Excel e formata o DataFrame conforme necessário."""
         # Note que adicionei o parâmetro texto_extraido para manter a consistência com a interface
         
@@ -41,9 +41,9 @@ class ExtracaoMitsui(EstrategiaExtracao):
         df = df.rename(columns={'Prêmio (R$)': 'Prêmio', 'Valor Total Comissão (R$)': 'Comissão'})
 
         #df.columns = ['Endosso', 'Apolice', 'Segurado', 'Ramo', 'Prêmio', '%', 'Comissão']
-        df['Prêmio'] = df['Prêmio'].apply(lambda x: "{:.2f}".format(x).replace('.', ',').strip())
-        df['%'] = df['%'].apply(lambda x: "{:.2f}".format(x).replace('.', ',').strip())
-        df['Comissão'] = df['Comissão'].apply(lambda x: "{:.2f}".format(x).replace('.', ',').strip())
+        df['Prêmio'] = df['Prêmio'].apply(number_format)
+        df['%'] = df['%'].apply(number_format)
+        df['Comissão'] = df['Comissão'].apply(number_format)
         df['Ramo'] = df['Ramo'].str.split('-').str[0].str.strip()
         df['Data'] = leitura_data_arquivo(nome_arquivo)
         df['Recibo'] = extrai_recibo('Extrato: ',r"\d{4}", nome_arquivo)

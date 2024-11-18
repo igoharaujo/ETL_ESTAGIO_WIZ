@@ -3,6 +3,7 @@ from importlib import import_module
 from rules.regras import rules_dict
 from extraction import *
 from architecture.path import *
+import pandas as pd
 
 logging.basicConfig(level=logging.INFO)
 
@@ -26,6 +27,7 @@ class DataExtractor:
     def extrair_dados(self):
         if self.classe_extracao:
             logging.info(f"Iniciando extração para {self.seguradora}")
+            # Modificação aqui: não passamos mais o texto_alvo
             estrategia = DataExtractorStrategy(
                 self.configs['nom_arquivo'], 
                 self.configs['extensao'], 
@@ -55,7 +57,12 @@ class DataExtractor:
             return None
 
 # Lista de seguradoras a serem processadas
-seguradoras = ['alfa', 'mitsui']  # inserir mais seguradoras a medida que novas forem surgindo.
+seguradoras = [
+'azul'
+,'alfa'
+,'mitsui'
+,'cardif'
+]
 
 if __name__ == "__main__":
     dfs_resultados = []

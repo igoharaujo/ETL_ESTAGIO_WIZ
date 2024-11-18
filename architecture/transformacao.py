@@ -9,10 +9,9 @@ class Transformacao:
         self.configuracao = configuracao  # Armazena o dicionário de configuração
         self.df = None  # DataFrame que será preenchido após a extração e processamento
 
-    def extrair_e_processar(self, nome_arquivo, texto_alvo):
+    def extrair_e_processar(self, nome_arquivo):
         """Executa a extração e processamento de dados."""
-        texto_extraido = self.estrategia.extrair_texto(nome_arquivo, texto_alvo)
-        self.df = self.estrategia.processar_dataframe(texto_extraido,nome_arquivo)
+        self.df = self.estrategia.processar_dataframe(nome_arquivo)
 
     def construir_tabela(self):
         """Constrói a tabela final com os dados extraídos."""
@@ -25,7 +24,7 @@ class Transformacao:
                 'NumeroApolice': row['Apolice'],
                 'NumeroProposta': '',
                 'NumeroEndosso': row.get('Endosso') if self.configuracao.get("NumeroEndosso") is False else self.configuracao["NumeroEndosso"],
-                'NumeroParcela': '',
+                'NumeroParcela': row.get('Parc') if self.configuracao.get("NumeroParcela") is False else self.configuracao["NumeroParcela"],
                 'DataVencimento': '',
                 'Dataextrato': row['Data'] if self.configuracao.get("data") is False else self.configuracao["data"],    
                 'dataExtrato': row['Data'] if self.configuracao.get("data") is False else self.configuracao["data"],  
@@ -49,4 +48,6 @@ class Transformacao:
             resultados.append(resposta)
 
         tabela_final = pd.DataFrame(resultados)
+        tabela_final['NmSegurado'] = tabela_final['NmSegurado'].str.strip()
         return tabela_final
+

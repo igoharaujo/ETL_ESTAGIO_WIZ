@@ -36,7 +36,8 @@ class DataExtractorStrategy:
         )
 
         # Extrai e processa os dados do arquivo
-        extrator.extrair_e_processar(os.path.join(self.pasta_arquivos, arquivo), "01220213000191")
+        # Removido o parâmetro "01220213000191" aqui
+        extrator.extrair_e_processar(os.path.join(self.pasta_arquivos, arquivo))
 
         # Constrói a tabela a partir dos dados extraídos
         tabela_resultado = extrator.construir_tabela()

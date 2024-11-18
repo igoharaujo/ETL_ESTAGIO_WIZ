@@ -8,7 +8,7 @@ import os
 
 # Implementação para extração de dados da seguradora Alfa
 class ExtracaoAlfa(EstrategiaExtracao):
-    def extrair_texto(self, nome_arquivo, texto_alvo):
+    def extrair_texto(self, nome_arquivo):
         """Método placeholder, não necessário para CSVs."""
         pass
 
@@ -16,7 +16,7 @@ class ExtracaoAlfa(EstrategiaExtracao):
         """Extrai o número do recibo (extrato) da coluna 'nrrecibo'."""
         return df['nrrecibo'].iloc[0]
 
-    def processar_dataframe(self, texto_extraido, nome_arquivo):
+    def processar_dataframe(self, nome_arquivo, texto_alvo=None):
         """Processa o arquivo CSV e formata o DataFrame conforme necessário."""
         df = pd.read_csv(nome_arquivo, sep=';')
 
