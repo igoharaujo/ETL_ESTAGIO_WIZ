@@ -9,13 +9,13 @@ from extraction.cardif import *
 class ExtracaoAzul(ExtracaoCardif):
 
     def processar_dataframe(self, nome_arquivo, texto_alvo="Segurado\nCPF / CNPJ\n"):
-        """Abstrai de ExtracaoCardif a função extrair texto"""
-
         """-------------------------------------------------------------"""
         """-----------------------TABELA PRINCIPAL----------------------"""
         """-------------------------------------------------------------"""
         try:
+            """Abstrai de ExtracaoCardif a função extrair texto"""
             texto_extraido = self.extrair_texto(nome_arquivo, texto_alvo)
+            
             padrao_nome = r'\b[A-Z]+(?:\s+[A-Z]+)*\b'
             nomes_segurado = re.findall(padrao_nome, texto_extraido)
             del nomes_segurado[-1]

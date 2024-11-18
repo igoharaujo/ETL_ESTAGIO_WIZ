@@ -42,7 +42,7 @@ class ExtracaoCardif(EstrategiaExtracao):
         df = df['Conteúdo'].str.split('\n', expand=True)
         df = df.iloc[:, :8]
 
-        """-----------------Transformação das colunas-----------------------"""
+        """--------------------Transformação das colunas-----------------------"""
         df = df.applymap(lambda x: ' '.join([word for word in str(x).split() if not re.search(r'[a-z]', word)]))
         df = df.drop(columns=[3])
         df[2] = df[2].str.replace('-', '')

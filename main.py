@@ -58,10 +58,11 @@ class DataExtractor:
 
 # Lista de seguradoras a serem processadas
 seguradoras = [
-'azul'
-,'alfa'
-,'mitsui'
-,'cardif'
+    'ylm'
+#'azul'
+#,'alfa'
+#,'mitsui'
+#,'cardif'
 ]
 
 if __name__ == "__main__":
