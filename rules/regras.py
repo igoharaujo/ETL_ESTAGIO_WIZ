@@ -9,7 +9,7 @@ cardif = {
     "NumeroEndosso": False,
     "extensao": '.pdf',
     "nom_arquivo": 'CARDIF',
-    "arquivo_extraction": 'cardif.py'  # Arquivo de extração correspondente
+    "arquivo_extraction": 'cardif.py'  
 }
 
 mitsui = {
@@ -27,14 +27,14 @@ mitsui = {
 }
 
 alfa = {
-    "NmSeguradora": False,  # Nome da seguradora
-    "CNPJSeguradora": False,  # CNPJ pode ser preenchido se necessário
+    "NmSeguradora": False,  # Quando False, ele pega o dado na pasta extraction
+    "CNPJSeguradora": False,  
     "NumeroParcela": 'False',
     "CanalVenda": "Conseg",  # Defina o canal de venda específico
-    "CdRamoSusep": False,  # Caso não tenha o código do ramo
-    "data": False,  # Precisa de data, então mantemos True
-    "NumeroRecibo": False,  # Extrai o número do recibo 
-    "NumeroEndosso": False,  # Se não extrair o endosso, mantenha como False
+    "CdRamoSusep": False,  
+    "data": False,  
+    "NumeroRecibo": False,  
+    "NumeroEndosso": False,  
     "extensao": '.csv',  # Extensão do arquivo que está sendo processado
     "nom_arquivo": 'ALFA',  # Nome padrão para o arquivo da seguradora Alfa
     "arquivo_extraction": 'alfa.py'  # Arquivo correspondente ao processo de extração da Alfa
