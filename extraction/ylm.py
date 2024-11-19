@@ -21,6 +21,11 @@ class ExtracaoYlm(EstrategiaExtracao):
 
 
         """--------------------Tabela Principal----------------"""
+        if 'Endosso / Fatura' in df1.columns:
+            df1 = pd.read_csv(nome_arquivo, sep=';', skiprows=15,)
+        else: 
+            df1 = pd.read_csv(nome_arquivo, sep=';', skiprows=16)
+
         df1['Endosso / Fatura'] = df1['Endosso / Fatura']
         df1['Apolice'] = df1['Apolice'].astype(str)
         df1['Segurado'] = df1['Segurado'].str.strip()
@@ -33,36 +38,38 @@ class ExtracaoYlm(EstrategiaExtracao):
         colunas = ['Segurado', 'Apolice', 'Endosso','Parc', 'Prêmio', '%', 'Comissão']
         df1.columns = colunas
         df1 = df1.astype(str)
+
+        if len(df1.columns) >= len(colunas):
+            df1.columns = colunas
+        df1 = df1.astype(str)
         """-------------------------------------------------------"""
+
+
 
         """---------------------Tabela Desconto-------------------"""
         df_desconto = pd.DataFrame()
-        vlr_desconto = '-' + str(desconto['Desc. de Adiantamento - R$'].iloc[0]).replace(' ', '')
-
-        if vlr_desconto != '-0,00':
+        desc = desconto['Desc. de Adiantamento - R$'].iloc[0]
+        vlr_desconto = number_format(desc)
+        if vlr_desconto != '0,00' and vlr_desconto != 0:
             df_desconto['Segurado'] = ['Desc. de Adiantamento - R$']
             df_desconto['apolice'] = ['0']
             df_desconto['Endosso'] = ['0']
             df_desconto['Parcela'] = ['0']
             df_desconto['Premio'] = ['0,00']
             df_desconto['% Comissao'] = ['0,00']
-            df_desconto['Valor Comissao'] = ('-'+ desconto['Desc. de Adiantamento - R$']).str.replace(' ','')
+            df_desconto['Valor Comissao'] = ('-' + desconto['Desc. de Adiantamento - R$'].astype(str)).str.replace(' ', '')
             ## Renomeando as colunas
             colunas = ['Segurado', 'Apolice', 'Endosso', 'Parc', 'Prêmio', '%', 'Comissão']
             df_desconto.columns = colunas
-        else:
-            df_deconto = None
-        """-------------------------------------------------------"""
-
-        df = pd.DataFrame()
-        # Concatenar dataframes
-        if df1 is not None and df_desconto is not None:
             df = pd.concat([df1, df_desconto], ignore_index=True)
         else:
             df = df1
+        """-------------------------------------------------------"""
+
+
 
         recibo = ' '.join(df_recibo['Nr. Demonstrativo'].astype(str).tolist())
-        df['Data'] = 'oi'
+        #df['Data'] = leitura_data_arquivo(nome_arquivo)
         df['Recibo'] = recibo
         df['Data'] = leitura_data_arquivo(nome_arquivo)
         df['Prêmio'] = df['Prêmio'].apply(number_format)
