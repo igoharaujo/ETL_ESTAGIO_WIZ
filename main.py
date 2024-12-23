@@ -58,7 +58,7 @@ class DataExtractor:
 
 # Lista de seguradoras a serem processadas
 seguradoras = [
-    'ylm'
+'ylm'
 #'azul'
 #,'alfa'
 #,'mitsui'
